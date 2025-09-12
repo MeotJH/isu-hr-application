@@ -1,0 +1,72 @@
+= HR 관리 시스템 API 가이드
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+
+== 개요
+
+HR 관리 시스템은 인사 관리를 위한 마이크로서비스 아키텍처 기반의 애플리케이션입니다.
+
+=== 시스템 아키텍처
+
+이 시스템은 다음과 같은 특징을 가지고 있습니다:
+
+* Spring Boot 3.5.5 기반
+* Java 17 사용
+* Spring Security 보안 적용
+* Spring Data JPA를 통한 데이터 관리
+* H2 Database (개발 환경)
+* Spring REST Docs를 통한 API 문서화
+
+=== API 공통 규약
+
+==== HTTP 상태 코드
+* `200 OK` - 성공
+* `400 Bad Request` - 잘못된 요청
+* `401 Unauthorized` - 인증 실패
+* `403 Forbidden` - 권한 없음
+* `404 Not Found` - 리소스 없음
+* `500 Internal Server Error` - 서버 오류
+* `503 Service Unavailable` - 서비스 사용 불가
+
+==== 응답 형식
+모든 API는 JSON 형식으로 응답합니다.
+
+== Health Check API
+
+시스템의 상태를 확인하는 API입니다.
+
+=== 기본 헬스체크
+
+서비스의 기본적인 상태를 확인합니다.
+
+==== 요청
+
+include::{snippets}/health/check/http-request.adoc[]
+
+==== 응답
+
+include::{snippets}/health/check/http-response.adoc[]
+
+==== 응답 필드
+
+include::{snippets}/health/check/response-fields.adoc[]
+
+=== 디테일 헬스체크
+
+서비스의 기본과 함께 디테일한 정보들의 상태를 확인합니다.
+
+==== 요청
+
+include::{snippets}/health/detailed/http-request.adoc[]
+
+==== 응답
+
+include::{snippets}/health/detailed/http-response.adoc[]
+
+==== 응답 필드
+
+include::{snippets}/health/detailed/response-fields.adoc[]
