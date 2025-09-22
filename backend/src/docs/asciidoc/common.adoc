@@ -1,0 +1,89 @@
+== API 공통 규약
+
+=== Base URL
+모든 API의 Base URL은 다음과 같습니다:
+----
+http://localhost:8085/api
+----
+
+=== HTTP 상태 코드
+[cols="1,3"]
+|===
+|상태 코드 |설명
+
+|`200 OK`
+|성공
+
+|`201 Created`
+|리소스 생성 성공
+
+|`400 Bad Request`
+|잘못된 요청 (파라미터 오류, 유효성 검증 실패 등)
+
+|`401 Unauthorized`
+|인증 실패
+
+|`403 Forbidden`
+|권한 없음
+
+|`404 Not Found`
+|리소스 없음
+
+|`409 Conflict`
+|리소스 충돌 (중복된 데이터 등)
+
+|`500 Internal Server Error`
+|서버 내부 오류
+
+|`503 Service Unavailable`
+|서비스 사용 불가
+|===
+
+=== 공통 응답 형식
+모든 API는 JSON 형식으로 응답합니다.
+
+==== 성공 응답
+[source,json]
+----
+{
+  "data": { ... },
+  "status": 200,
+  "message": "Success"
+}
+----
+
+==== 에러 응답
+[source,json]
+----
+{
+  "status": 404,
+  "error": "Not Found",
+  "message": "Employee not found with sabun: 99999",
+  "timestamp": "2025-09-22T10:30:00"
+}
+----
+
+=== 공통 헤더
+모든 요청에는 다음 헤더가 포함되어야 합니다:
+
+[cols="1,1,3"]
+|===
+|헤더명 |필수여부 |설명
+
+|`Content-Type`
+|Y
+|요청 본문의 미디어 타입 (application/json)
+
+|`Accept`
+|N
+|응답으로 받고자 하는 미디어 타입 (application/json)
+
+|`Authorization`
+|N
+|인증이 필요한 API의 경우 Bearer 토큰
+|===
+
+=== 날짜 형식
+모든 날짜 필드는 다음 형식을 사용합니다:
+* 날짜: `YYYY-MM-DD` (예: 2025-09-22)
+* 날짜시간: `YYYY-MM-DDTHH:mm:ss` (예: 2025-09-22T10:30:00)
