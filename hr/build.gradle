@@ -41,6 +41,9 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
+	// entity key 용 ulid lib
+	implementation 'com.github.f4b6a3:ulid-creator:5.2.0'
+
 	//Database H2 Database (로컬 개발용)
 	runtimeOnly 'com.h2database:h2'
 }
