@@ -26,7 +26,7 @@ public class Employee extends BaseEntity {
     @Column(name = "emp_ymd", length = 100)
     private String empYmd;
 
-    @Column(length = 255)
+    @Column(length = 256)
     private String email;
 
     @Column(length = 100)
@@ -34,11 +34,11 @@ public class Employee extends BaseEntity {
 
     public static Employee createNewEmployee(String sabun, String name, String birYmd, String empYmd, String email, String address) {
 
-        if (sabun == null || sabun.length() == 0) {
+        if (sabun == null || sabun.isEmpty()) {
             throw new IllegalArgumentException("사번은 필수입니다.");
         }
 
-        if (name == null || name.length() == 0) {
+        if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("이름은 필수입니다.");
         }
 

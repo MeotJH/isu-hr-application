@@ -48,7 +48,7 @@ public class EmployeeController {
     public ResponseEntity<List<EmployeeResponseDto>> modifyEmployee(
             @RequestBody List<EmployeeRequestDto> employees
     ) {
-        log.info("employee post request: {}", employees.toString());
+        log.info("employee patch request: {}", employees.toString());
         List<EmployeeResponseDto> employeeResponseDtos = employeeService.modifyEmployee(employees);
         return ResponseEntity.ok(employeeResponseDtos);
     }

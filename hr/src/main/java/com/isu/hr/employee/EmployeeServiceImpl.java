@@ -2,7 +2,6 @@ package com.isu.hr.employee;
 
 import com.isu.hr.employee.dto.EmployeeRequestDto;
 import com.isu.hr.employee.dto.EmployeeResponseDto;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
