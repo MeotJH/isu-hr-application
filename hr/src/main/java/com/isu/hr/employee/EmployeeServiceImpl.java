@@ -38,7 +38,27 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<EmployeeResponseDto> getAllEmployees(List<String> sabuns) {
-        return List.of();
+        List<Employee> employees = employeeRepository.findAll().stream()
+                .filter(employee -> sabuns.contains(employee.getSabun()))
+                .toList();
+
+        if (employees.isEmpty()) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "No employees found with provided sabuns"
+            );
+        }
+
+        return employees.stream()
+                .map(employee -> EmployeeResponseDto.builder()
+                        .sabun(employee.getSabun())
+                        .name(employee.getName())
+                        .birYmd(employee.getBirYmd())
+                        .empYmd(employee.getEmpYmd())
+                        .email(employee.getEmail())
+                        .address(employee.getAddress())
+                        .build())
+                .toList();
     }
 
     @Override
@@ -68,7 +88,81 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public List<EmployeeResponseDto> modifyEmployee(List<EmployeeRequestDto> dtos) {
+        List<String> sabuns = dtos.stream()
+                .map(EmployeeRequestDto::getSabun)
+                .toList();
+
+        List<Employee> employeesToModify = employeeRepository.findAll().stream()
+                .filter(employee -> sabuns.contains(employee.getSabun()))
+                .toList();
+
+        if (employeesToModify.isEmpty()) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "No employees found with provided sabuns"
+            );
+        }
+
+        for (Employee employee : employeesToModify) {
+            EmployeeRequestDto dto = dtos.stream()
+                    .filter(d -> d.getSabun().equals(employee.getSabun()))
+                    .findFirst()
+                    .orElse(null);
+
+            if (dto != null) {
+                employee.setName(dto.getName());
+                employee.setBirYmd(dto.getBirYmd());
+                employee.setEmpYmd(dto.getEmpYmd());
+                employee.setEmail(dto.getEmail());
+                employee.setAddress(dto.getAddress());
+            }
+        }
+
+        List<Employee> modifiedEmployees = employeeRepository.saveAll(employeesToModify);
+
+        return modifiedEmployees.stream()
+                .map(employee -> EmployeeResponseDto.builder()
+                        .sabun(employee.getSabun())
+                        .name(employee.getName())
+                        .birYmd(employee.getBirYmd())
+                        .empYmd(employee.getEmpYmd())
+                        .email(employee.getEmail())
+                        .address(employee.getAddress())
+                        .build())
+                .toList();
+    }
+
+    @Override
     public List<EmployeeResponseDto> deleteEmployee(List<EmployeeRequestDto> dtos) {
-        return List.of();
+        List<String> sabuns = dtos.stream()
+                .map(EmployeeRequestDto::getSabun)
+                .toList();
+
+        List<Employee> employeesToDelete = employeeRepository.findAll().stream()
+                .filter(employee -> sabuns.contains(employee.getSabun()))
+                .toList();
+
+        if (employeesToDelete.isEmpty()) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "No employees found with provided sabuns"
+            );
+        }
+
+        List<EmployeeResponseDto> deletedEmployees = employeesToDelete.stream()
+                .map(employee -> EmployeeResponseDto.builder()
+                        .sabun(employee.getSabun())
+                        .name(employee.getName())
+                        .birYmd(employee.getBirYmd())
+                        .empYmd(employee.getEmpYmd())
+                        .email(employee.getEmail())
+                        .address(employee.getAddress())
+                        .build())
+                .toList();
+
+        employeeRepository.deleteAll(employeesToDelete);
+
+        return deletedEmployees;
     }
 }

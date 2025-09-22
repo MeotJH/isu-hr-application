@@ -1,0 +1,45 @@
+== Health Check API
+
+시스템의 상태를 확인하는 API입니다.
+
+=== 기본 헬스체크
+
+서비스의 기본적인 상태를 확인합니다.
+
+==== 요청
+include::{snippets}/health/check/http-request.adoc[]
+
+==== 응답
+include::{snippets}/health/check/http-response.adoc[]
+
+==== 응답 필드
+include::{snippets}/health/check/response-fields.adoc[]
+
+=== 상세 헬스체크
+
+서비스의 상세한 상태 정보를 확인합니다.
+
+==== 요청
+include::{snippets}/health/detailed/http-request.adoc[]
+
+==== 응답
+include::{snippets}/health/detailed/http-response.adoc[]
+
+==== 응답 필드
+include::{snippets}/health/detailed/response-fields.adoc[]
+
+=== 헬스체크 응답 상태
+
+[cols="1,3"]
+|===
+|상태 |설명
+
+|`UP`
+|서비스가 정상적으로 동작 중
+
+|`DOWN`
+|서비스에 문제가 발생
+
+|`UNKNOWN`
+|서비스 상태를 확인할 수 없음
+|===

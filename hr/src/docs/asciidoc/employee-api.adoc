@@ -1,0 +1,109 @@
+== Employee API
+
+직원 정보를 관리하는 API입니다.
+
+=== 직원 조회
+
+사번을 통해 특정 직원의 정보를 조회합니다.
+
+==== 요청
+include::{snippets}/employee/one/http-request.adoc[]
+
+==== 응답
+include::{snippets}/employee/one/http-response.adoc[]
+
+==== 응답 필드
+include::{snippets}/employee/one/response-fields.adoc[]
+
+==== 에러 응답
+직원을 찾을 수 없는 경우 404 상태 코드와 함께 에러 메시지가 반환됩니다.
+
+[source,json]
+----
+{
+  "status": 404,
+  "error": "Employee not found with sabun: 99999",
+  "timestamp": "2025-09-22T10:30:00"
+}
+----
+
+=== 직원 저장
+
+새로운 직원 정보를 저장합니다. 여러 직원을 한 번에 저장할 수 있습니다.
+
+==== 요청
+include::{snippets}/employee/save/http-request.adoc[]
+
+==== 요청 필드
+include::{snippets}/employee/save/request-fields.adoc[]
+
+==== 응답
+include::{snippets}/employee/save/http-response.adoc[]
+
+==== 응답 필드
+include::{snippets}/employee/save/response-fields.adoc[]
+
+==== 유효성 검증 규칙
+
+[cols="1,1,3"]
+|===
+|필드명 |필수여부 |규칙
+
+|`sabun`
+|Y
+|사번은 필수이며, 중복될 수 없습니다
+
+|`name`
+|Y
+|이름은 필수입니다
+
+|`birYmd`
+|N
+|생년월일 (YYYYMMDD 형식)
+
+|`empYmd`
+|N
+|입사일 (YYYYMMDD 형식)
+
+|`email`
+|N
+|이메일 형식이어야 합니다
+
+|`address`
+|N
+|주소 정보
+|===
+
+==== 에러 응답 예시
+
+===== 필수 필드 누락
+[source,json]
+----
+{
+  "status": 400,
+  "error": "사번은 필수입니다.",
+  "timestamp": "2025-09-22T10:30:00"
+}
+----
+
+===== 중복된 사번
+[source,json]
+----
+{
+  "status": 409,
+  "error": "이미 존재하는 사번입니다: 10001",
+  "timestamp": "2025-09-22T10:30:00"
+}
+----
+
+=== 직원 목록 조회
+
+전체 직원 목록을 조회합니다. (향후 구현 예정)
+
+=== 직원 정보 수정
+
+기존 직원 정보를 수정합니다. (향후 구현 예정)
+
+=== 직원 삭제
+
+직원 정보를 삭제합니다. (향후 구현 예정)

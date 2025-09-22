@@ -15,6 +15,8 @@ public interface EmployeeService {
 
     List<EmployeeResponseDto> saveEmployee(List<EmployeeRequestDto> dtos);
 
+    List<EmployeeResponseDto> modifyEmployee(List<EmployeeRequestDto> dtos);
+
     List<EmployeeResponseDto> deleteEmployee(List<EmployeeRequestDto> dtos);
 
 }

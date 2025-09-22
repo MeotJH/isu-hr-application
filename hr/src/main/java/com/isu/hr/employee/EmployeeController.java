@@ -26,12 +26,39 @@ public class EmployeeController {
         return ResponseEntity.ok(employee);
     }
 
+    @PostMapping(path = "/list")
+    public ResponseEntity<List<EmployeeResponseDto>> getAllEmployees(
+            @RequestBody List<String> sabuns
+    ) {
+        log.info("employee list request: {}", sabuns.toString());
+        List<EmployeeResponseDto> employees = employeeService.getAllEmployees(sabuns);
+        return ResponseEntity.ok(employees);
+    }
+
     @PostMapping
     public ResponseEntity<List<EmployeeResponseDto>> saveEmployee(
             @RequestBody List<EmployeeRequestDto> employees
     ) {
         log.info("employee post request: {}", employees.toString());
         List<EmployeeResponseDto> employeeResponseDtos = employeeService.saveEmployee(employees);
+        return ResponseEntity.ok(employeeResponseDtos);
+    }
+
+    @PatchMapping
+    public ResponseEntity<List<EmployeeResponseDto>> modifyEmployee(
+            @RequestBody List<EmployeeRequestDto> employees
+    ) {
+        log.info("employee post request: {}", employees.toString());
+        List<EmployeeResponseDto> employeeResponseDtos = employeeService.modifyEmployee(employees);
+        return ResponseEntity.ok(employeeResponseDtos);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<List<EmployeeResponseDto>> deleteEmployee(
+            @RequestBody List<EmployeeRequestDto> employees
+    ) {
+        log.info("employee delete request: {}", employees.toString());
+        List<EmployeeResponseDto> employeeResponseDtos = employeeService.deleteEmployee(employees);
         return ResponseEntity.ok(employeeResponseDtos);
     }
 
