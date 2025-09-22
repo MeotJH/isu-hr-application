@@ -24,14 +24,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 class HealthCheckControllerTest extends RestDocsTestBase {
 
     @MockitoBean
-    private HealthCheckService healthCheckService;
+    private HealthCheckServiceImpl healthCheckService;
 
     @Test
     @DisplayName("헬스체크 API - 정상 응답")
     void healthCheck() throws Exception {
         // given
         HealthCheckResponse mockResponse = HealthCheckResponse.up(); // 실제 메서드와 동일하게
-        
+
         when(healthCheckService.getHealth()).thenReturn(mockResponse);
         
         // when & then
@@ -67,7 +67,7 @@ class HealthCheckControllerTest extends RestDocsTestBase {
         when(healthCheckService.getDetailedHealth()).thenReturn(mockResponse);
 
         // when & then
-        mockMvc.perform(get("/health/detailed")
+        mockMvc.perform(get("/health/detail")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print()) // 실제 응답을 콘솔에 출력
                 .andExpect(status().isOk())
@@ -77,7 +77,7 @@ class HealthCheckControllerTest extends RestDocsTestBase {
                 .andExpect(jsonPath("$.version").value("1.0.0"))
                 .andExpect(jsonPath("$.env").exists())
                 .andExpect(jsonPath("$.details").isMap())
-                .andDo(document("health/detailed",
+                .andDo(document("health/detail",
                         responseFields(
                                 fieldWithPath("status").description("서비스 상태 (UP/DOWN)"),
                                 fieldWithPath("timestamp").description("응답 시간 (ISO 8601)"),

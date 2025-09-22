@@ -29,7 +29,7 @@ public class HealthCheckController {
     }
 
 
-    @GetMapping("/detailed")
+    @GetMapping("/detail")
     public ResponseEntity<HealthCheckResponse> detailedHealthCheck() {
         log.info("Detailed health check requested");
         try {
