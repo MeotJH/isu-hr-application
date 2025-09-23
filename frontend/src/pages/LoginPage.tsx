@@ -5,10 +5,12 @@ import {
   Button,
   Typography,
   Checkbox,
-  message,
+  App,
   Space
 } from 'antd';
 import { UserOutlined, LockOutlined, SafetyCertificateOutlined, TeamOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
+import { useAuthStore } from '../stores/authStore';
 import type { LoginForm } from '../types/auth';
 
 const { Title, Text } = Typography;
@@ -16,6 +18,9 @@ const { Title, Text } = Typography;
 const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
+  const { message } = App.useApp();
+  const navigate = useNavigate();
+  const login = useAuthStore((state) => state.login);
 
   const onFinish = async (values: LoginForm) => {
     setLoading(true);
@@ -24,10 +29,25 @@ const LoginPage = () => {
 
       // TODO: 실제 API 호출로 대체
       await new Promise(resolve => setTimeout(resolve, 1500));
-
       if (values.username === 'admin' && values.password === 'admin123') {
+        console.log('로그인 성공!:', values);
+
+        // 가짜 사용자 데이터 생성
+        const mockUser = {
+          id: '1',
+          username: values.username,
+          name: '관리자',
+          email: 'admin@company.com',
+          department: 'IT부서',
+          position: '시스템 관리자',
+          role: 'admin' as const
+        };
+
+        // Zustand 스토어에 로그인 상태 저장
+        login(mockUser);
+
         message.success('로그인 성공!');
-        // TODO: 대시보드로 리다이렉트
+        navigate('/dashboard');
       } else {
         message.error('아이디 또는 비밀번호가 올바르지 않습니다.');
       }
