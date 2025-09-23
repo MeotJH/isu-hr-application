@@ -6,7 +6,10 @@ import {
   UserOutlined,
   CalendarOutlined,
   FileTextOutlined,
-  SettingOutlined
+  SettingOutlined,
+  IdcardOutlined,
+  SwapOutlined,
+  UserAddOutlined
 } from '@ant-design/icons'
 
 const { Sider } = Layout
@@ -22,9 +25,26 @@ const Sidebar = () => {
       label: '대시보드'
     },
     {
-      key: '/employees',
+      key: 'employees',
       icon: <TeamOutlined />,
-      label: '직원 관리'
+      label: '직원 관리',
+      children: [
+        {
+          key: '/employees',
+          icon: <IdcardOutlined />,
+          label: '인사정보'
+        },
+        {
+          key: '/employees/transfer',
+          icon: <SwapOutlined />,
+          label: '인사발령'
+        },
+        {
+          key: '/employees/new',
+          icon: <UserAddOutlined />,
+          label: '신규직원'
+        }
+      ]
     },
     {
       key: '/organization',
@@ -49,7 +69,9 @@ const Sidebar = () => {
   ]
 
   const handleMenuClick = ({ key }: { key: string }) => {
-    navigate(key)
+    if (key.startsWith('/')) {
+      navigate(key)
+    }
   }
 
   return (

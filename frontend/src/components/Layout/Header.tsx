@@ -1,7 +1,8 @@
 import { Button, Avatar, Space, Typography, Layout } from 'antd'
-import { UserOutlined, LogoutOutlined, SettingOutlined } from '@ant-design/icons'
+import { UserOutlined, LogoutOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../../stores/authStore'
+import styles from './Header.module.scss'
 
 const { Header: AntHeader } = Layout
 const { Text } = Typography
@@ -16,36 +17,24 @@ const Header = () => {
   }
 
   return (
-    <AntHeader style={{
-      background: '#fff',
-      padding: '0 24px',
-      borderBottom: '1px solid #f0f0f0',
-      display: 'flex',
-      justifyContent: 'flex-end',
-      alignItems: 'center'
-    }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-        <Space>
+    <AntHeader className={styles.header}>
+      <div className={styles.userSection}>
+        <Space className={styles.userInfo}>
           <Avatar icon={<UserOutlined />} />
-          <div>
-            <Text strong>{user?.name || user?.username}</Text>
-            <br />
-            <Text type="secondary" style={{ fontSize: '12px' }}>
+          <Space direction="horizontal" size={12}>
+            <Text strong className={styles.userName}>
+              {user?.name || user?.username}
+            </Text>
+            <Text type="secondary" className={styles.userDetails}>
               {user?.department} · {user?.position}
             </Text>
-          </div>
+          </Space>
         </Space>
-
-        <Button
-          icon={<SettingOutlined />}
-          type="text"
-          onClick={() => navigate('/settings')}
-        />
-
         <Button
           icon={<LogoutOutlined />}
           type="text"
           onClick={handleLogout}
+          className={styles.logoutButton}
         >
           로그아웃
         </Button>
