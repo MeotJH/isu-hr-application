@@ -3,9 +3,10 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import LoginPage from './pages/LoginPage'
 import DashboardPage from './pages/DashboardPage'
-import EmployeePage from './pages/EmployeePage'
 import MainLayout from './components/Layout/MainLayout'
 import { useAuthStore } from './stores/authStore'
+import EmployeeListPage from "./pages/EmployeeListPage.tsx";
+import EmployeePage from "./pages/EmployeePage.tsx";
 
 const queryClient = new QueryClient()
 
@@ -42,7 +43,8 @@ function App() {
                 </ProtectedRoute>
               }
             >
-              <Route path="employees" element={<EmployeePage />} />
+              <Route path="employees" element={<EmployeeListPage />} />
+              <Route path="employee" element={<EmployeePage />} />
               {/* 향후 추가될 페이지들 */}
               <Route path="organization" element={<div>조직도 페이지</div>} />
               <Route path="attendance" element={<div>근태 관리 페이지</div>} />

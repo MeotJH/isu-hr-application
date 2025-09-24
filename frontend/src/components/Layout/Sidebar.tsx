@@ -32,7 +32,7 @@ const Sidebar = () => {
         {
           key: '/employees',
           icon: <IdcardOutlined />,
-          label: '인사정보'
+          label: '직원 관리'
         },
         {
           key: '/employees/transfer',
