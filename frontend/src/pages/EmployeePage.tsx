@@ -1,7 +1,6 @@
-import {Typography, Card, Layout, Tabs  } from 'antd'
+import {Typography, Card,  Tabs  } from 'antd'
 import BasicInfo from "../components/employee/BasicInfo.tsx";
 import EmployeeCard from "../components/employee/EmployeeCard.tsx";
-const { Content } = Layout;
 
 const { Title } = Typography
 
@@ -28,24 +27,19 @@ const EmployeePage = () => {
 
   return (
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-      <Content style={{
-        padding: '6px',
-        background: '#ffffff',
-        borderRadius: '12px',
-        flex: 1,
-        overflow: 'auto'
-      }}>
-        {/* 페이지 헤더 */}
-        <div style={{ marginBottom: '12px' }}>
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginBottom: '4px'
-          }}>
-            <Title level={5} style={{ margin: 0 }}>직원 관리</Title>
+          {/* 헤더 */}
+          <div style={{ flex: '0 0 auto', boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',  }}>
+              <Card
+                  style={{
+                      borderRadius: 8
+                  }}
+
+              >
+                  <Title level={4} style={{ margin: 0 }}>
+                      직원 관리
+                  </Title>
+              </Card>
           </div>
-        </div>
 
         {/* 첫 번째 Card - 시간 섹션 */}
         <EmployeeCard/>
@@ -59,7 +53,6 @@ const EmployeePage = () => {
           />
         </Card>
 
-      </Content>
     </div>
   )
 }
