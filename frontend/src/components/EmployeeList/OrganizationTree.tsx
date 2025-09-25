@@ -8,11 +8,7 @@ const OrganizationTree = () => {
     };
 
     return (
-        <div style={{
-            height: '100%',
-            overflow: 'auto'
-        }}>
-            <Tree
+        <Tree
                 showIcon
                 defaultExpandAll
                 switcherIcon={<DownOutlined />}
@@ -21,7 +17,6 @@ const OrganizationTree = () => {
                 virtual={false}
                 blockNode
             />
-        </div>
     );
 }
 
