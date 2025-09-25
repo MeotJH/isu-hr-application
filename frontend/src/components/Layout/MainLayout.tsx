@@ -7,23 +7,19 @@ const { Content } = Layout
 
 const MainLayout = () => {
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Sidebar />
-
-      <Layout style={{ marginLeft: 240 }}>
+    <Layout style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
         <Header />
-
-        <Content style={{
-          padding: '12px',
-          background: '#f0f2f5',
-          height: 'calc(100vh - 64px)',
-          overflow: 'hidden'
-        }}>
-
-            <Outlet />
-
-        </Content>
-      </Layout>
+        <div style={{ minHeight: '0', display: 'flex',  flex: '1 1 auto'}}>
+            <Sidebar />
+            <Content style={{
+                padding: '12px',
+                background: '#f0f2f5',
+                minHeight: '0',
+                overflow: 'hidden'
+            }}>
+                <Outlet />
+            </Content>
+        </div>
     </Layout>
   )
 }

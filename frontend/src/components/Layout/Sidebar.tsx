@@ -75,44 +75,42 @@ const Sidebar = () => {
   }
 
   return (
-    <Sider
-      theme="light"
-      width={240}
-      style={{
-        overflow: 'auto',
-        height: '100vh',
-        position: 'fixed',
-        left: 0,
-        top: 0,
-        bottom: 0,
-        borderRight: '1px solid #f0f0f0'
-      }}
-    >
-      {/* 로고 영역 */}
-      <div style={{
-        height: '64px',
-        padding: '16px',
-        borderBottom: '1px solid #f0f0f0',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '12px'
-      }}>
-        <TeamOutlined style={{ fontSize: '24px', color: '#1890ff' }} />
-        <span style={{ fontWeight: 'bold', fontSize: '16px' }}>인사 관리</span>
-      </div>
+      <Sider
+          theme="light"
+          width={240}
+          style={{
+              flex: '0 0 240px',
+              borderRight: '1px solid #f0f0f0',
+              display: 'flex',
+              flexDirection: 'column', // ← 핵심
+              minHeight: 0            // ← 수축 허용
+          }}
+      >
+          {/* 로고 영역 (고정 높이) */}
+          <div style={{
+              flex: '0 0 64px',
+              padding: '16px',
+              borderBottom: '1px solid #f0f0f0',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 12
+          }}>
+              <TeamOutlined style={{ fontSize: 24, color: '#1890ff' }} />
+              <span style={{ fontWeight: 'bold', fontSize: 16 }}>인사 관리</span>
+          </div>
 
-      {/* 메뉴 */}
-      <Menu
-        mode="inline"
-        selectedKeys={[location.pathname]}
-        items={menuItems}
-        onClick={handleMenuClick}
-        style={{
-          borderRight: 0,
-          height: 'calc(100vh - 64px)'
-        }}
-      />
-    </Sider>
+          {/* 메뉴 컨테이너 (남은 영역 전부 차지 + 스크롤) */}
+          <div style={{ flex: '1 1 auto', minHeight: 0, overflow: 'auto' }}>
+              <Menu
+                  mode="inline"
+                  selectedKeys={[location.pathname]}
+                  items={menuItems}
+                  onClick={handleMenuClick}
+                  style={{ borderRight: 0 }}
+              />
+          </div>
+      </Sider>
+
   )
 }
 
