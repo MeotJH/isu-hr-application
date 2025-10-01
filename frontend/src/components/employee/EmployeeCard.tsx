@@ -4,7 +4,8 @@ import {CameraOutlined, SyncOutlined, UserOutlined} from "@ant-design/icons";
 
 const EmployeeCard=() => {
     return (
-        <Card style={{ marginBottom: 16, boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)', marginTop: '10px' }} bordered={false}>
+
+        <Card style={{ flex: 1, marginBottom: 16, boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)', marginTop: '10px' }} bordered={false}>
             <Row gutter={36}>
                 <Col style={{ position: 'relative', display: 'inline-block' }}>
                     <Avatar

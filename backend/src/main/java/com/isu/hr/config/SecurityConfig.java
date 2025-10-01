@@ -14,6 +14,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .cors(cors -> {}) // CORS 활성화
                 .csrf(csrf -> csrf.disable()) // REST API는 CSRF 불필요
                 .headers(headers ->
                         headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable) // H2 콘솔용

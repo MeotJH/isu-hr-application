@@ -1,4 +1,4 @@
-import { Row, Col, Card, Typography,  Flex, Statistic } from "antd";
+import {Row, Col, Card, Typography, Flex, Statistic, Button} from "antd";
 import {SettingOutlined, UserOutlined} from "@ant-design/icons";
 import OrganizationTree from "../components/EmployeeList/OrganizationTree.tsx";
 import EmployeeInfiniteTable from "../components/EmployeeList/EmployeeInfiniteTable.tsx";
@@ -19,9 +19,19 @@ const EmployeeListPage = () => {
                     }}
 
                 >
-                    <Title level={4} style={{ margin: 0 }}>
-                        직원 관리
-                    </Title>
+                    <Row justify="space-between">
+                        <Col span={4} >
+                            <Title level={4} style={{ margin: 0 }}>
+                                직원 관리
+                            </Title>
+                        </Col>
+                        <Col span={2} >
+                            <Button type="primary">
+                                직원 추가
+                            </Button>
+                        </Col>
+                    </Row>
+
                 </Card>
             </div>
 

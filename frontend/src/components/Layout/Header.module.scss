@@ -1,0 +1,42 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+  padding: 0 24px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.userSection {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.userInfo {
+  display: flex !important;
+  align-items: center;
+}
+
+.userName {
+  font-size: 16px;
+  color: #1f1f1f;
+}
+
+.userDetails {
+  font-size: 13px;
+  color: #8c8c8c;
+}
+
+.logoutButton {
+  color: #ff4d4f;
+
+  &:hover,
+  &:focus {
+    color: #cf1322;
+    background-color: transparent;
+  }
+}
