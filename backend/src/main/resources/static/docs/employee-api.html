@@ -559,24 +559,26 @@ Content-Length: 172
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /employee HTTP/1.1
 Content-Type: application/json
-Content-Length: 351
+Content-Length: 401
 Host: localhost:8080
 
-[ {
-  "sabun" : "10001",
-  "name" : "김테스트",
-  "birYmd" : "19900101",
-  "empYmd" : "20250922",
-  "email" : "kim@test.com",
-  "address" : "서울시 강남구"
-}, {
-  "sabun" : "10002",
-  "name" : "박테스트",
-  "birYmd" : "19910202",
-  "empYmd" : "20250922",
-  "email" : "park@test.com",
-  "address" : "서울시 서초구"
-} ]</code></pre>
+{
+  "employees" : [ {
+    "sabun" : "10001",
+    "name" : "김테스트",
+    "birYmd" : "19900101",
+    "empYmd" : "20250922",
+    "email" : "kim@test.com",
+    "address" : "서울시 강남구"
+  }, {
+    "sabun" : "10002",
+    "name" : "박테스트",
+    "birYmd" : "19910202",
+    "empYmd" : "20250922",
+    "email" : "park@test.com",
+    "address" : "서울시 서초구"
+  } ]
+}</code></pre>
 </div>
 </div>
 </div>
@@ -597,32 +599,32 @@ Host: localhost:8080
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].sabun</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>employees[].sabun</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">직원의 사번</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>employees[].name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">직원의 이름</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].birYmd</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>employees[].birYmd</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">직원의 생년월일</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].empYmd</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>employees[].empYmd</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">직원의 입사일</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].email</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>employees[].email</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">직원의 이메일 주소</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].address</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>employees[].address</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">직원의 거주지</p></td>
 </tr>
@@ -808,7 +810,7 @@ Content-Length: 351
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2025-09-22 12:19:01 +0900
+Last updated 2025-10-02 09:30:38 +0900
 </div>
 </div>
 </body>

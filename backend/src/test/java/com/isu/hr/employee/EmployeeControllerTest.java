@@ -2,6 +2,7 @@ package com.isu.hr.employee;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.isu.hr.config.RestDocsTestBase;
+import com.isu.hr.employee.dto.EmployeeRequest;
 import com.isu.hr.employee.dto.EmployeeRequestDto;
 import com.isu.hr.employee.dto.EmployeeResponseDto;
 import org.junit.jupiter.api.DisplayName;
@@ -169,10 +170,13 @@ public class EmployeeControllerTest extends RestDocsTestBase {
                         .build()
         );
 
+        EmployeeRequest employeeRequest = new EmployeeRequest();
+        employeeRequest.setEmployees(requestDtos);
+
         when(service.saveEmployee(any())).thenReturn(responseDtos);
 
         ObjectMapper objectMapper = new ObjectMapper();
-        String requestJson = objectMapper.writeValueAsString(requestDtos);
+        String requestJson = objectMapper.writeValueAsString(employeeRequest);
 
         //when & then
         mockMvc.perform(post("/employee")
@@ -187,12 +191,12 @@ public class EmployeeControllerTest extends RestDocsTestBase {
                 .andExpect(jsonPath("$[1].name").value("박테스트"))
                 .andDo(document("employee/save",
                         requestFields(
-                                fieldWithPath("[].sabun").description("직원의 사번"),
-                                fieldWithPath("[].name").description("직원의 이름"),
-                                fieldWithPath("[].birYmd").description("직원의 생년월일"),
-                                fieldWithPath("[].empYmd").description("직원의 입사일"),
-                                fieldWithPath("[].email").description("직원의 이메일 주소"),
-                                fieldWithPath("[].address").description("직원의 거주지")
+                                fieldWithPath("employees[].sabun").description("직원의 사번"),
+                                fieldWithPath("employees[].name").description("직원의 이름"),
+                                fieldWithPath("employees[].birYmd").description("직원의 생년월일"),
+                                fieldWithPath("employees[].empYmd").description("직원의 입사일"),
+                                fieldWithPath("employees[].email").description("직원의 이메일 주소"),
+                                fieldWithPath("employees[].address").description("직원의 거주지")
                         ),
                         responseFields(
                                 fieldWithPath("[].sabun").description("저장된 직원의 사번"),

@@ -1,5 +1,6 @@
 package com.isu.hr.employee;
 
+import com.isu.hr.employee.dto.EmployeeRequest;
 import com.isu.hr.employee.dto.EmployeeRequestDto;
 import com.isu.hr.employee.dto.EmployeeResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -37,10 +38,10 @@ public class EmployeeController {
 
     @PostMapping
     public ResponseEntity<List<EmployeeResponseDto>> saveEmployee(
-            @RequestBody List<EmployeeRequestDto> employees
+            @RequestBody EmployeeRequest employeesRequest
     ) {
-        log.info("employee post request: {}", employees.toString());
-        List<EmployeeResponseDto> employeeResponseDtos = employeeService.saveEmployee(employees);
+        log.info("employee post request: {}", employeesRequest.getEmployees().toString());
+        List<EmployeeResponseDto> employeeResponseDtos = employeeService.saveEmployee(employeesRequest.getEmployees());
         return ResponseEntity.ok(employeeResponseDtos);
     }
 

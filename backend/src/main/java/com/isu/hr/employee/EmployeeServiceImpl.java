@@ -3,11 +3,13 @@ package com.isu.hr.employee;
 import com.isu.hr.employee.dto.EmployeeRequestDto;
 import com.isu.hr.employee.dto.EmployeeResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -62,7 +64,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<EmployeeResponseDto> saveEmployee(List<EmployeeRequestDto> dtos) {
-        List<Employee> employees = dtos.stream()
+        // 기존에 존재하는 sabun 조회
+        List<String> requestSabuns = dtos.stream()
+                .map(EmployeeRequestDto::getSabun)
+                .toList();
+
+        List<Employee> existingEmployees = employeeRepository.findAll().stream()
+                .filter(emp -> requestSabuns.contains(emp.getSabun()))
+                .toList();
+
+        // 중복되지 않는 데이터만 필터링
+        List<String> existingSabuns = existingEmployees.stream()
+                .map(Employee::getSabun)
+                .toList();
+
+        List<Employee> newEmployees = dtos.stream()
+                .filter(dto -> !existingSabuns.contains(dto.getSabun()))
                 .map(dto -> Employee.createNewEmployee(
                         dto.getSabun(),
                         dto.getName(),
@@ -70,9 +87,17 @@ public class EmployeeServiceImpl implements EmployeeService {
                         dto.getEmpYmd(),
                         dto.getEmail(),
                         dto.getAddress()
-                )).toList();
+                ))
+                .toList();
 
-        List<Employee> savedEmployees = employeeRepository.saveAll(employees);
+        if (newEmployees.isEmpty()) {
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT,
+                    "All employees already exist with provided sabuns"
+            );
+        }
+
+        List<Employee> savedEmployees = employeeRepository.saveAll(newEmployees);
 
         return savedEmployees.stream()
                 .map(employee -> EmployeeResponseDto.builder()
